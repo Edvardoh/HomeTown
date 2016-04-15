@@ -1,0 +1,11 @@
+[{
+	"id": 1,
+	"name": "Front Street Cafe",
+	"description": "Best coffee ever!",
+	"category": "coffee shop",
+	"images": [],
+	"coords": {
+		"latitude": 39.9701888,
+		"longitude": -75.1378033
+	}
+}]
