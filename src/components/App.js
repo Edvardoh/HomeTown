@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addPoi, removePoi } from '../actions/poiActions';
-import GettingStarted from './GettingStarted';
+import HomeTownMap from './HomeTownMap';
 import PointOfInterestForm from './PointOfInterestForm';
 
 class App extends Component {
@@ -31,6 +31,7 @@ class App extends Component {
         <ul>
           { pois.map(poi => <li key={poi.id} onClick={this.handleDelete.bind(this, poi.id)}> {poi.id} {poi.name} </li> ) }
         </ul>
+        <HomeTownMap markers={pois} />
         <pre>
           redux state = { JSON.stringify(state, null, 2)}
         </pre>
