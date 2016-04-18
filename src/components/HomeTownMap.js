@@ -11,25 +11,11 @@ import { triggerEvent } from "react-google-maps/lib/utils";
  * Add <script src="https://maps.googleapis.com/maps/api/js"></script> to your HTML to provide google.maps reference
  */
 export default class HomeTownMap extends Component {
-  state = {
-    markers: [{
-      position: {
-        lat: 39.9711974,
-        lng: -75.144421,
-      },
-      key: `home`,
-      defaultAnimation: 2,
-    }],
-  }
-
   constructor(props, context) {
     super(props, context);
   }
 
   render() {
-    console.log('state', this.state);
-    console.log('props', this.props);
-
     return (
       <GoogleMapLoader
         containerElement={
