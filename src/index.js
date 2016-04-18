@@ -7,6 +7,8 @@ import rootReducer from './reducers';
 
 const store = createStore(rootReducer);
 
+require('./scss/style.scss');
+
 ReactDOM.render(
 	<Provider store={store}>
 		<App />
