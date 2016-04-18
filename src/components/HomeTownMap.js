@@ -16,13 +16,14 @@ export default class HomeTownMap extends Component {
   }
 
   render() {
+
     return (
       <GoogleMapLoader
         containerElement={
           <div
             style={{
-              height: `300px`,
-              width: `300px`
+              height: window.innerHeight,
+              width: window.innerWidth
             }}
           />
         }

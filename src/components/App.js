@@ -26,15 +26,7 @@ class App extends Component {
 
     return (
       <div>
-        <PointOfInterestForm onNewPoi={this.handleNewPoi.bind(this)} />
-      	<button onClick={this.handleClick.bind(this)}>Add POI</button>
-        <ul>
-          { pois.map(poi => <li key={poi.id} onClick={this.handleDelete.bind(this, poi.id)}> {poi.id} {poi.name} </li> ) }
-        </ul>
         <HomeTownMap markers={pois} />
-        <pre>
-          redux state = { JSON.stringify(state, null, 2)}
-        </pre>
       </div>
     );
   }
