@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { addPoi, removePoi } from '../actions/poiActions';
 import HomeTownMap from './HomeTownMap';
 import PointOfInterestForm from './PointOfInterestForm';
+import ControlPanel from './ControlPanel';
 
 class App extends Component {
 	constructor(props) {
@@ -27,6 +28,7 @@ class App extends Component {
     return (
       <div>
         <HomeTownMap markers={pois} />
+        <ControlPanel selected=""/>
       </div>
     );
   }
