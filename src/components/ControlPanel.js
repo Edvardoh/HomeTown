@@ -19,7 +19,7 @@ export default class ControlPanel extends Component {
     //TODO refactor this.. this.state was undefined when first rendering so I did this
     var selected = this.state ? this.state.selected : this.props.selected;
 
-    return 'control-details settings-panel ' + ((control === selected) ? 'active' : 'default');
+    return 'control-details ' + control + ' ' + ((control === selected) ? 'active' : 'default');
   }
 
   render() {
