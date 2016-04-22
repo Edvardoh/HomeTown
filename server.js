@@ -1,5 +1,6 @@
 var express = require('express');
 var path = require('path');
+var fs = require('fs');
 var httpProxy = require('http-proxy');
 
 var proxy = httpProxy.createProxyServer();
@@ -23,6 +24,13 @@ if (!isProduction) {
     proxy.web(req, res, {
         target: 'http://localhost:8080'
     });
+  });
+
+  // Seed data while for staging env
+  const json = JSON.parse(fs.readFileSync('points_of_interest.json', 'utf8'));
+
+  app.get('/api/pois', function(req, res) {
+    res.json(json);
   });
 }
 

@@ -9,6 +9,8 @@ const pois = (state = [], action) => {
 			return state.filter(poi =>
         poi.id !== action.id
       );
+    case 'RECEIVED_POIS':
+      return action.pois;
 		default:
 			return state;
 	}

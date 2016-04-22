@@ -1,11 +1,31 @@
 [{
-	"id": 1,
+	"id": 0,
 	"name": "Front Street Cafe",
 	"description": "Best coffee ever!",
 	"category": "coffee shop",
 	"images": [],
-	"coords": {
-		"latitude": 39.9701888,
-		"longitude": -75.1378033
+	"position": {
+		"lat": 39.9701888,
+		"lng": -75.1378033
 	}
+}, {
+  "id": 1,
+  "name": "Philadelphia Museum of Art",
+  "description": "Look at some art yo",
+  "category": "culture",
+  "images": [],
+  "position": {
+    "lat": 39.9655697,
+    "lng": -75.1809661
+  }
+}, {
+  "id": 2,
+  "name": "Fogo de Chão",
+  "description": "Brazilian steak house",
+  "category": "restaurant",
+  "images": [],
+  "position": {
+    "lat": 39.9508712,
+    "lng": -75.1651703
+  }
 }]

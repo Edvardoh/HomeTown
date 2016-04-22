@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addPoi, removePoi } from '../actions/poiActions';
+import { addPoi, removePoi, fetchPois } from '../actions/poiActions';
 import HomeTownMap from './HomeTownMap';
 import PointOfInterestForm from './PointOfInterestForm';
 import ControlPanel from './ControlPanel';
@@ -9,6 +9,10 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 	}
+
+  componentWillMount() {
+    this.props.dispatch(fetchPois());
+  }
 
 	handleClick() {
 		this.props.dispatch(addPoi({name: "Test"}));

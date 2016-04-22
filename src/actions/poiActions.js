@@ -11,3 +11,14 @@ export function removePoi(id) {
     id
   }
 }
+
+export function fetchPois() {
+  return dispatch => {
+    fetch('/api/pois')
+      .then(resp => resp.json())
+      .then(json => dispatch({
+        type: 'RECEIVED_POIS',
+        pois: json
+    }));
+  }
+}
