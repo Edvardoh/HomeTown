@@ -1,15 +1,35 @@
-var webpack = require('webpack');
-var WebpackDevServer = require('webpack-dev-server');
-var config = require('./webpack.config');
+var express = require('express');
+var path = require('path');
+var httpProxy = require('http-proxy');
 
-new WebpackDevServer(webpack(config), {
-  publicPath: config.output.publicPath,
-  hot: true,
-  historyApiFallback: true
-}).listen(3000, 'localhost', function (err, result) {
-  if (err) {
-    return console.log(err);
-  }
+var proxy = httpProxy.createProxyServer();
+var app = express();
 
-  console.log('Listening at http://localhost:3000/');
+var isProduction = process.env.NODE_ENV === 'production';
+var port = isProduction ? process.env.PORT : 3000;
+var publicPath = path.resolve(__dirname);
+
+app.use(express.static(publicPath));
+
+// Proxy for webpack-dev-server
+if (!isProduction) {
+  // We require the bundler inside the if block because
+  // it is only needed in a development environment. 
+  var bundle = require('./bundler.js');
+  bundle();
+
+  // Any requests to localhost:3000/build are proxied to webpack-dev-server
+  app.all('/build/*', function (req, res) {
+    proxy.web(req, res, {
+        target: 'http://localhost:8080'
+    });
+  });
+}
+
+proxy.on('error', function(e) {
+  console.log('Could not connect to proxy, please try again...');
+});
+
+app.listen(port, function () {
+  console.log('Server running on port ' + port);
 });
