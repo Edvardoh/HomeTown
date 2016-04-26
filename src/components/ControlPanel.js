@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
+import PoiManager from './PoiManager';
 
 export default class ControlPanel extends Component {
 
   constructor(props, context) {
     super(props, context);
+
+    this.state = {
+      selected: ''
+    }
   }
 
   selectControl(control) {
+    //deselect control if it has already been selected
     if(this.state && this.state.selected == control) {
       this.setState({selected: ''});
       return;
@@ -16,10 +22,7 @@ export default class ControlPanel extends Component {
   }
 
   isActive(control) {
-    //TODO refactor this.. this.state was undefined when first rendering so I did this
-    var selected = this.state ? this.state.selected : this.props.selected;
-
-    return 'control-details ' + control + ' ' + ((control === selected) ? 'active' : 'default');
+    return 'control-details ' + control + ' ' + ((control === this.state.selected) ? 'active' : 'default');
   }
 
   render() {
@@ -60,6 +63,7 @@ export default class ControlPanel extends Component {
           </tbody>
         </table>
       </div>
+      <PoiManager modalIsOpen={true}/>
     );
   }
 }

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addPoi, removePoi, fetchPois } from '../actions/poiActions';
 import HomeTownMap from './HomeTownMap';
-import PointOfInterestForm from './PointOfInterestForm';
 import ControlPanel from './ControlPanel';
 
 class App extends Component {
