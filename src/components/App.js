@@ -28,6 +28,8 @@ class App extends Component {
   render() {
     const { pois, state } = this.props;
 
+    console.log(state);
+
     return (
       <div>
         <HomeTownMap markers={pois} />

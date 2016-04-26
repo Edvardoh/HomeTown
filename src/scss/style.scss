@@ -17,6 +17,22 @@ body {
 		}
 	}
 
+	.ReactModalPortal .ReactModal__Content {
+	    width: 400px;
+
+	    form {
+	    	text-align: center;
+
+	    	.form-group {
+	    		text-align: left;
+
+	    		label {
+		    		line-height: 14px;
+			    }
+	    	}
+	    }
+	}
+
 	.icon.marker-circle {
 		height: 18px;
 	    width: 18px;

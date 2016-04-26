@@ -7,7 +7,8 @@ export default class ControlPanel extends Component {
     super(props, context);
 
     this.state = {
-      selected: ''
+      selected: '',
+      poiManager: false
     }
   }
 
@@ -23,6 +24,20 @@ export default class ControlPanel extends Component {
 
   isActive(control) {
     return 'control-details ' + control + ' ' + ((control === this.state.selected) ? 'active' : 'default');
+  }
+
+  openModal(modal) {
+    var newState = {};
+    newState[modal] = true;
+
+    this.setState(newState);
+  }
+
+  closeModal(modal) {
+    var newState = {};
+    newState[modal] = false;
+
+    this.setState(newState);
   }
 
   render() {
@@ -52,7 +67,7 @@ export default class ControlPanel extends Component {
         
         <table className={this.isActive('settings')}>
           <tbody>
-            <tr>
+            <tr onClick={this.openModal.bind(this, 'poiManager')}>
               <td className="first">
                 <i className="fa fa-map-marker icon"></i>
               </td>
@@ -62,7 +77,7 @@ export default class ControlPanel extends Component {
             </tr>
           </tbody>
         </table>
-        <PoiManager modalIsOpen={true}/>
+        <PoiManager poiManager={this.state.poiManager} closeModal={this.closeModal.bind(this, 'poiManager')}/>
       </div>
     );
   }
