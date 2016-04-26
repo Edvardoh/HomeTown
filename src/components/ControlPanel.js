@@ -62,8 +62,8 @@ export default class ControlPanel extends Component {
             </tr>
           </tbody>
         </table>
+        <PoiManager modalIsOpen={true}/>
       </div>
-      <PoiManager modalIsOpen={true}/>
     );
   }
 }
