@@ -22,7 +22,7 @@ if (!isProduction) {
   // Any requests to localhost:3000/build are proxied to webpack-dev-server
   app.all('/build/*', function (req, res) {
     proxy.web(req, res, {
-        target: 'http://localhost:8080'
+        target: 'http://localhost:3001'
     });
   });
 
