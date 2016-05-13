@@ -1,43 +1,47 @@
-var express = require('express');
-var path = require('path');
-var fs = require('fs');
-var httpProxy = require('http-proxy');
+import path from 'path';
+import bodyParser from 'body-parser';
+import express from 'express';
+import http from 'http';
+import socketIO from 'socket.io';
+import config from 'config';
 
-var proxy = httpProxy.createProxyServer();
-var app = express();
+import * as api from './server/api/http';
+import * as poiService from './server/api/service/point_of_interest';
+import * as uni from './server/app.js';
 
-var isProduction = process.env.NODE_ENV === 'production';
-var port = isProduction ? process.env.PORT : 3000;
-var publicPath = path.resolve(__dirname);
+const app = express();
+const httpServer = http.createServer(app);
+const port = config.get('express.port') || 3000;
 
-app.use(express.static(publicPath));
+var io = socketIO(httpServer);
 
-// Proxy for webpack-dev-server
-if (!isProduction) {
-  // We require the bundler inside the if block because
-  // it is only needed in a development environment. 
-  var bundle = require('./bundler.js');
-  bundle();
+app.set('views', path.join(__dirname, 'server', 'views'));
+app.set('view engine', 'ejs');
 
-  // Any requests to localhost:3000/build are proxied to webpack-dev-server
-  app.all('/build/*', function (req, res) {
-    proxy.web(req, res, {
-        target: 'http://localhost:3001'
-    });
-  });
+/**
+ * Server middleware
+ */
+app.use(require('serve-static')(path.join(__dirname, config.get('buildDirectory'))));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
 
-  // Seed data while for staging env
-  const json = JSON.parse(fs.readFileSync('points_of_interest.json', 'utf8'));
+/**
+ * API Endpoints
+ */
+app.get('/api/0/pois', api.getPois);
+app.post('/api/0/pois', api.addPoi);
+app.post('/api/0/pois/:id', api.editPoi);
+app.delete('/api/0/pois/:id', api.deletePoi);
 
-  app.get('/api/pois', function(req, res) {
-    res.json(json);
-  });
-}
+app.get('/favicon.ico', (req, res) => res.sendFile(path.join(__dirname, 'images', 'favicon.ico')));
 
-proxy.on('error', function(e) {
-  console.log('Could not connect to proxy, please try again...');
-});
+/**
+ * Universal Application endpoint
+ */
+app.get('*', uni.handleRender);
 
-app.listen(port, function () {
-  console.log('Server running on port ' + port);
-});
+poiService.liveUpdates(io);
+
+httpServer.listen(port);
