@@ -5,4 +5,4 @@
 2. `npm update && npm install`
 3. `npm run dbsetup`
 4. `npm start`
-5. Navigate to [http://localhost:3000](http://localhost:3000)
+5. Navigate to [http://localhost:3001](http://localhost:3001)

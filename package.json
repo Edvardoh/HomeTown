@@ -1,7 +1,7 @@
 {
   "name": "HomeTown",
   "version": "1.0.0",
-  "description": "An example universal JS application written with the 3REE stack, React + Redux + RethinkDB + Express.",
+  "description": "",
   "main": "server.babel.js",
   "scripts": {
     "build:prod": "NODE_ENV=production webpack",
@@ -11,16 +11,9 @@
     "start:prod": "NODE_ENV=production node server.babel.js",
     "test": "./node_modules/karma/bin/karma start"
   },
-  "keywords": [
-    "react",
-    "3ree",
-    "rethinkdb",
-    "redux",
-    "webpack"
-  ],
+  "keywords": [],
   "license": "MIT",
   "dependencies": {
-    "bluebird": "3.1.1",
     "body-parser": "1.14.2",
     "classnames": "2.2.3",
     "config": "1.19.0",
@@ -28,7 +21,6 @@
     "express": "4.13.3",
     "history": "1.13.0",
     "moment": "2.11.1",
-    "nib": "^1.1.0",
     "node-uuid": "1.4.7",
     "react": "0.14.7",
     "react-dom": "0.14.7",
