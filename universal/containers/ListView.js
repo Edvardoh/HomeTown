@@ -6,7 +6,7 @@ import PoiList from '../components/PoiList';
 
 import * as HomeTownActions from '../actions/HomeTownActions';
 
-class MyPois extends Component {
+class ListView extends Component {
   static propTypes = {
     editPoi: React.PropTypes.func.isRequired,
     deletePoi: React.PropTypes.func.isRequired,
@@ -26,13 +26,10 @@ class MyPois extends Component {
   }
 }
 
-/**
- * Expose "Smart" Component that is connect-ed to Redux
- */
 export default connect(
   state => ({
     pois: state.homeTownApp.pois,
     userId: state.homeTownApp.userId
   }), 
   dispatch => bindActionCreators(HomeTownActions, dispatch)
-)(MyPois);
+)(ListView);

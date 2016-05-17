@@ -5,7 +5,6 @@ export function setupRealtime(store, actions) {
 
   io.on('poi-change', (change) => {
     let state = store.getState();
-    console.log('poi-change', change);
     if (!change.old_val) {
       store.dispatch(actions.addPoiSuccess(change.new_val));
     } else if (!change.new_val) {

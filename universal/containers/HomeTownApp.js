@@ -8,7 +8,6 @@ import PoiList from '../components/PoiList';
 import PoiTicker from '../components/PoiTicker';
 import AsyncBar from '../components/AsyncBar';
 import PoiInput from '../components/PoiInput';
-import HomeTownMap from '../components/HomeTownMap';
 
 import * as HomeTownActions from '../actions/HomeTownActions';
 
@@ -24,7 +23,6 @@ class HomeTownApp extends Component {
   };
 
   render() {
-    console.log(this.props);
     // For passing all actions to a child!
     let actions = { 
       addPoi: this.props.addPoi,
@@ -35,7 +33,8 @@ class HomeTownApp extends Component {
     return (
       <div className="HomeTown-Container">
         <ControlPanel actions={actions} selected="" isWorking={this.props.isWorking || false} />
-        <HomeTownMap markers={this.props.pois} onSubmit={this.props.addPoi} />
+        {this.props.googleMapView}
+        {this.props.listView}
       </div>
     );
   }
@@ -54,7 +53,7 @@ export default connect(
   dispatch => bindActionCreators(HomeTownActions, dispatch)
 )(HomeTownApp);
 
-
+// <HomeTownMap markers={this.props.pois} onSubmit={this.props.addPoi} />
 // return (
 //       <div className="HomeTown-Container">
 //         <Header/>

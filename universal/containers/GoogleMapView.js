@@ -1,9 +1,10 @@
 import React, {PropTypes, Component} from 'react';
-import moment from 'moment';
-import PoiInput from './PoiInput';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as HomeTownActions from '../actions/HomeTownActions';
 import { GoogleMapLoader, GoogleMap, Marker } from "react-google-maps";
 
-export default class HomeTownMap extends Component {
+class GoogleMapView extends Component {
   constructor(props, context){
     super(props, context);
   }
@@ -31,7 +32,7 @@ export default class HomeTownMap extends Component {
               defaultCenter={{ lat: 39.9711974, lng: -75.144421 }}
               onClick={::this.handleClick}
             >
-              {this.props.markers.map((marker, index) => {
+              {this.props.pois.map((marker, index) => {
                 return (
                   <Marker key={index}
                     {...marker}
@@ -45,3 +46,14 @@ export default class HomeTownMap extends Component {
     );
   }
 }
+
+/**
+ * Expose "Smart" Component that is connect-ed to Redux
+ */
+export default connect(
+  state => ({
+    pois: state.homeTownApp.pois,
+    userId: state.homeTownApp.userId
+  }), 
+  dispatch => bindActionCreators(HomeTownActions, dispatch)
+)(GoogleMapView);

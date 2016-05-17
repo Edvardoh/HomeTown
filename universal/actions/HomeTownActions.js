@@ -48,7 +48,6 @@ export function loadPoisFailure(error) {
 }
 
 export function addPoi(poi) {
-  console.log('Add poi', poi);
   return dispatch => {
     dispatch(addPoiRequest(poi));
 

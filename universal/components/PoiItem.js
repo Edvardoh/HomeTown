@@ -20,9 +20,9 @@ export default class PoiItem extends Component {
   }
 
   handleClick() {
-    if (this.props.editable) {
-      this.setState({ editing: true });
-    }
+    // if (this.props.editable) {
+    //   this.setState({ editing: true });
+    // }
   }
 
   handleSave(poi) {
@@ -57,12 +57,12 @@ export default class PoiItem extends Component {
         <div className='HomeTown-poiItem'>
           <p className='rowNumber'>{row+1}.</p>
           <p className='title' onClick={::this.handleClick}>
-            {poi.text}
-            
+            {poi.name}            
           </p>
+          <p>{poi.position.lat}</p>
+          <p>{poi.position.lng}</p>
           {del}
           <p className='created'>{moment(modified).fromNow()}</p>
-          <p className='outcome'>{poi.value}</p>
         </div>
       );
     }
