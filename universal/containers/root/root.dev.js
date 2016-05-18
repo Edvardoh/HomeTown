@@ -9,7 +9,7 @@ export default class Root extends Component {
     const { store, routing } = this.props;
     return (
       <Provider store={store}>
-        <div className="root-div">
+        <div id="HomeTownApp">
           <Router history={browserHistory}>
             {routing}
           </Router>

@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux';
 import Header from '../components/Header';
 import ControlPanel from '../components/ControlPanel';
 import PoiList from '../components/PoiList';
-import PoiTicker from '../components/PoiTicker';
 import AsyncBar from '../components/AsyncBar';
 import PoiInput from '../components/PoiInput';
 
@@ -52,18 +51,3 @@ export default connect(
   }), 
   dispatch => bindActionCreators(HomeTownActions, dispatch)
 )(HomeTownApp);
-
-// <HomeTownMap markers={this.props.pois} onSubmit={this.props.addPoi} />
-// return (
-//       <div className="HomeTown-Container">
-//         <Header/>
-//         <ControlPanel actions={actions} />
-//         <HomeTownMap markers={[]} onSubmit={this.props.addPoi} />
-//         <section className='HomeTown-addPoiForm'>
-//           <PoiInput onSubmit={this.props.addPoi} userId={this.props.userId} textLabel='What happened?' valueLabel='Rating' />
-//         </section>
-//         <AsyncBar isWorking={this.props.isWorking} error={this.props.error} />
-//         {this.props.myPois}
-//         {this.props.otherPois}
-//       </div>
-//     );

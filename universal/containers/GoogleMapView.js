@@ -1,16 +1,43 @@
 import React, {PropTypes, Component} from 'react';
 import { connect } from 'react-redux';
+import { default as canUseDOM } from "can-use-dom";
+import { triggerEvent } from "react-google-maps/lib/utils";
+import { default as _ } from "lodash";
 import { bindActionCreators } from 'redux';
 import * as HomeTownActions from '../actions/HomeTownActions';
 import { GoogleMapLoader, GoogleMap, Marker } from "react-google-maps";
 
 class GoogleMapView extends Component {
-  constructor(props, context){
+   constructor(props, context) {
     super(props, context);
+    this.handleWindowResize = _.throttle(::this.handleWindowResize, 500);
+  }
+
+  componentDidMount() {
+    if (!canUseDOM) {
+      return;
+    }
+    window.addEventListener(`resize`, this.handleWindowResize);
+  }
+
+  componentWillUnmount() {
+    if (!canUseDOM) {
+      return;
+    }
+    window.removeEventListener(`resize`, this.handleWindowResize);
+  }
+
+  handleWindowResize() {
+    console.log(`handleWindowResize`, this._googleMapComponent);
+    triggerEvent(this._googleMapComponent, `resize`);
   }
 
   handleClick() {
     console.log('map clicked');
+  }
+
+  handleMarkerClick(marker) {
+    console.log(marker);
   }
 
   render() {
@@ -34,7 +61,7 @@ class GoogleMapView extends Component {
             >
               {this.props.pois.map((marker, index) => {
                 return (
-                  <Marker key={index}
+                  <Marker key={index} onClick={this.handleMarkerClick.bind(this, marker)}
                     {...marker}
                   />
                 );
